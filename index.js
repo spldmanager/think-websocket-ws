@@ -59,6 +59,7 @@ module.exports = class WebSocket {
     const args = {url, websocketData: data, websocket: socket, wss, method: 'WEBSOCKET'};
     if (open) {
       args.req = request;
+      args.req.wsUrl = request.url
     }
     return mockHttp(args, this.app);
   }
