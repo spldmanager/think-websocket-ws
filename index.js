@@ -58,8 +58,12 @@ module.exports = class WebSocket {
     if (url[0] !== '/') url = `/${url}`;
     const args = {url, websocketData: data, websocket: socket, wss, method: 'WEBSOCKET'};
     if (open) {
-      args.req = request;
-      args.req.wsUrl = request.url
+     args.req = request;
+      args.req.wsUrl = request.url;
+      let reqParamIndex = request.url.indexOf('?')
+      if(reqParamIndex!=-1){
+        args.url = args.url+'?'+request.url.split('?')[1]
+      }
     }
     return mockHttp(args, this.app);
   }
